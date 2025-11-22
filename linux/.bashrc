@@ -1,4 +1,7 @@
 # .bashrc
+#Limit subdirs
+PROMPT_DIRTRIM=1
+PS1="\[\e[1;32m\]\u@\h:\[\e[0m\]\n\[\e[1;34m\]\w\[\e[0m\] \$ "
 
 #terraform
 alias tp='terraform plan'
