@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mealie
+  name: mealie
+  namespace: mealie
+spec:
+  replicas: 1
+  containers:
+  - image: ghcr.io/mealie-recipes/mealie:v3.5.0
+    name: mealie
+    ports:
+      - containerPort: 9000
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
