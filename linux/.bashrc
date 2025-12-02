@@ -1,7 +1,12 @@
 # .bashrc
 #Limit subdirs
 PROMPT_DIRTRIM=1
-PS1="\[\e[1;32m\]\u@\h:\[\e[0m\]\n\[\e[1;34m\]\w\[\e[0m\] \$ "
+
+# Git branch in prompt (#4)
+parse_git_branch() {
+    git branch 2>/dev/null | sed -n '/\* /s///p'
+}
+PS1="\[\e[1;32m\]\u@\h:\[\e[0m\]\n\[\e[1;34m\]\w\[\e[0m\] \[\e[33m\]\$(parse_git_branch)\[\e[0m\] \$ "
 
 #terraform
 alias tp='terraform plan'
@@ -15,6 +20,17 @@ alias kc='kubectx'
 alias l='ls -l'
 alias ll='ls -lha'
 alias ..='cd ..'
+
+# Auto-correct and shell QoL improvements
+shopt -s cmdhist autocd cdspell
+
+# Better ls/grep/mkdir
+alias grep='grep --color=auto'
+alias mkdir='mkdir -pv'
+alias ls='ls --color=auto'
+
+# sudo last command
+alias plz='sudo $(fc -ln -1)'
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
