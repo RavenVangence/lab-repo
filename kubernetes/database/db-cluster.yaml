@@ -1,0 +1,9 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: app-postgre-db
+  namespace: database
+spec:
+  instances: 3
+  storage:
+    size: 2Gi
