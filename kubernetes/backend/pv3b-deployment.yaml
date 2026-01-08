@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - image: sol45invictus/p-backend:v1.0.0
+          name: pv3b
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          env:
+            - name: DB_HOST
+              value: app-postgre-db-rw.databse.svc.cluster.local
+            - name: DB_NAME
+              value: appdb
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-postgre-db-app
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-postgre-db-app
+                  key: password
+            - name: TomorrowIoApiKey
+              valueFrom:
+                secretKeyRef:
+                  name: app-postgre-db-app
+                  key: tomorrow-io-key
+          volumeMounts:
+            - name: app-postgre-db-ca
+              mountPath: /etc/ssl/postgres
+              readOnly: true
+      volumes:
+        - name: app-postgre-db-ca
+          secret:
+            secretName: app-postgre-db-ca
