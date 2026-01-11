@@ -1,0 +1,4 @@
+# Ignore control plane, talos config, and worker files
+controlplane.yaml
+worker.yaml
+talosconfig

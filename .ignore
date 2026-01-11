@@ -1,0 +1,4 @@
+# Tool/IDE ignore file: mirror entries from .gitignore
+controlplane.yaml
+worker.yaml
+talosconfig/
