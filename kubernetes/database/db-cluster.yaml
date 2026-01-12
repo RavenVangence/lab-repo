@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: app-postgre-db
+  name: app-postgresql-db
   namespace: database
 spec:
   instances: 3

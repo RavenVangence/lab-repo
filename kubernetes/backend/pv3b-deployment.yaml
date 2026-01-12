@@ -39,17 +39,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: app-postgre-db-app
-                  key: username
+                  key: DB_USER
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: app-postgre-db-app
-                  key: password
+                  key: DB_PASSWORD
             - name: TomorrowIoApiKey
               valueFrom:
                 secretKeyRef:
                   name: app-postgre-db-app
-                  key: tomorrow-io-key
+                  key: TomorrowIoApiKey
           volumeMounts:
             - name: app-postgre-db-ca
               mountPath: /etc/ssl/postgres

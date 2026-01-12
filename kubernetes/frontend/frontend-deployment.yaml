@@ -26,7 +26,7 @@ spec:
           image: sol45invictus/p-frontend:v1.0.0
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 67
+            - containerPort: 8080
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
