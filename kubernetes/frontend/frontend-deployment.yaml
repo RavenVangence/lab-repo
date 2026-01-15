@@ -7,6 +7,11 @@ metadata:
     app: frontend
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       app: frontend
@@ -23,10 +28,13 @@ spec:
           type: RuntimeDefault
       containers:
         - name: frontend
-          image: sol45invictus/p-frontend:v1.0.0
+          image: sol45invictus/p-frontend:v1.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          env:
+            - name: VITE_API_BASE_URL
+              value: "http://backend-service.backend:8080/api"
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
